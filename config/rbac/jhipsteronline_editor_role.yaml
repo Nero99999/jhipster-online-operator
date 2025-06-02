@@ -1,0 +1,31 @@
+# permissions for end users to edit jhipsteronlines.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: jhipsteronline-editor-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: jhipster-online-operator
+    app.kubernetes.io/part-of: jhipster-online-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: jhipsteronline-editor-role
+rules:
+- apiGroups:
+  - maximilianopizarro.github.io
+  resources:
+  - jhipsteronlines
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - maximilianopizarro.github.io
+  resources:
+  - jhipsteronlines/status
+  verbs:
+  - get

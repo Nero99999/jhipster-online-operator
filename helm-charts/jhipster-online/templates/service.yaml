@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "jhipster-online.fullname" . }}
+  labels:
+    {{- include "jhipster-online.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 8080
+      protocol: TCP
+      name: jhipster-online
+    - port: 8081
+      protocol: TCP
+      name: jdl-studio
+      targetPort: 8081      
+  selector:
+    app: {{ .Chart.Name }}

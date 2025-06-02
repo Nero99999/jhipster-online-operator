@@ -1,0 +1,6 @@
+# Use the 'create api' subcommand to add watches to this file.
+- group: maximilianopizarro.github.io
+  version: v1alpha1
+  kind: JhipsterOnline
+  chart: helm-charts/jhipster-online
+#+kubebuilder:scaffold:watch

@@ -1,0 +1,41 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: manager-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: jhipster-online-operator
+    app.kubernetes.io/part-of: jhipster-online-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: manager-role
+rules:
+- apiGroups: [""]
+  resources: ["pods","secrets", "configmaps", "events", "services", "persistentvolumeclaims","deployments", "statefulsets", "replicasets", "daemonsets", "nodes"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+- apiGroups:
+    - apps
+  resources:
+    - deployments
+    - statefulsets
+    - replicasets
+    - daemonsets
+  verbs:
+    - get
+    - list
+    - watch
+    - create
+    - update
+    - patch
+    - delete
+- apiGroups: ["route.openshift.io"]
+  resources: ["routes"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]    
+- apiGroups:
+    - maximilianopizarro.github.io
+  resources:
+    - jhipsteronlines
+    - jhipsteronlines/status
+    - jhipsteronlines/finalizers
+  verbs:
+    - '*'
