@@ -4,7 +4,8 @@ metadata:
   annotations:
     alm-examples: '[]'
     capabilities: Basic Install
-  name: jhipster-online-operator.v0.0.0
+    description: JHipster Online provides an intuitive web interface for generating JHipster projects, allowing you to define your application architecture using a JDL (JHipster Domain Language) model and generate the code directly into a GitHub repository.    
+  name: jhipster-online-operator.v0.1.0
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
@@ -34,9 +35,13 @@ spec:
   - quarkus
   links:
   - name: Jhipster Online Operator
-    url: https://jhipster-online-operator.domain
+    url: https://maximilianopizarro.github.io/jhipster-online-operator/
   maturity: alpha
+  maintainers:
+  - name: Maximiliano Pizarro
+    email: maximiliano.pizarro.5@gmail.com
+  minKubeVersion: 1.19.0
   provider:
     name: maximilianopizarro
     url: https://maximilianopizarro.github.io/jhipster-online-helm-chart/
-  version: 0.0.0
+  version: 0.1.0
