@@ -1,5 +1,7 @@
 # JHipster Online Operator
 
+[![Docker Pulls](https://img.shields.io/docker/pulls/jhipster/jhipster-online.svg)](https://hub.docker.com/r/jhipster/jhipster-online/) [![Open](https://img.shields.io/static/v1?label=Open%20in&message=Developer%20Sandbox&logo=eclipseche&color=FDB940&labelColor=525C86)](https://workspaces.openshift.com/#https://github.com/redhat-developer-demos/jhipster-online) [![Open](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/jhipster-online)](https://artifacthub.io/packages/helm/jhipster-online/jhipster-online)
+
 This repository hosts the JHipster Online Operator, designed to seamlessly deploy JHipster Online on Red Hat OpenShift and Kubernetes environments.
 
 JHipster Online provides an intuitive web interface for generating JHipster projects, allowing you to define your application architecture using a JDL (JHipster Domain Language) model and generate the code directly into a GitHub repository.
